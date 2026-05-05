@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PatientMicroservice", "PatientMicroservice", "{EB033E3F-BB14-4238-820E-1523ADA6AAE8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediLabo.Patient.Domain", "MediLabo.Patient.Domain\MediLabo.Patient.Domain.csproj", "{93182EDC-212F-47F5-AD2C-B410F15C101F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediLabo.Patient.Database", "MediLabo.Patient.Database\MediLabo.Patient.Database.csproj", "{59EB2A55-92CB-483D-9658-03A067CF043F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediLabo.Patient.API", "MediLabo.Patient.API\MediLabo.Patient.API.csproj", "{4CD7ECCD-1661-4A22-8BA2-25839152DE7B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{93182EDC-212F-47F5-AD2C-B410F15C101F} = {EB033E3F-BB14-4238-820E-1523ADA6AAE8}
+		{59EB2A55-92CB-483D-9658-03A067CF043F} = {EB033E3F-BB14-4238-820E-1523ADA6AAE8}
+		{4CD7ECCD-1661-4A22-8BA2-25839152DE7B} = {EB033E3F-BB14-4238-820E-1523ADA6AAE8}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{93182EDC-212F-47F5-AD2C-B410F15C101F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93182EDC-212F-47F5-AD2C-B410F15C101F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93182EDC-212F-47F5-AD2C-B410F15C101F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93182EDC-212F-47F5-AD2C-B410F15C101F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59EB2A55-92CB-483D-9658-03A067CF043F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59EB2A55-92CB-483D-9658-03A067CF043F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59EB2A55-92CB-483D-9658-03A067CF043F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59EB2A55-92CB-483D-9658-03A067CF043F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4CD7ECCD-1661-4A22-8BA2-25839152DE7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CD7ECCD-1661-4A22-8BA2-25839152DE7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CD7ECCD-1661-4A22-8BA2-25839152DE7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CD7ECCD-1661-4A22-8BA2-25839152DE7B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
