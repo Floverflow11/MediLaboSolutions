@@ -1,0 +1,39 @@
+﻿@HostAddress = http://localhost:5136
+
+### GET all patients via gateway
+GET {{HostAddress}}/api/patients
+Accept: application/json
+
+### GET patient by id via gateway
+GET {{HostAddress}}/api/patients/1
+Accept: application/json
+
+### POST create patient via gateway
+POST {{HostAddress}}/api/patients
+Content-Type: application/json
+
+{
+  "FirstName": "Test",
+  "LastName": "TestNone",
+  "DateOfBirth": "1966-12-31",
+  "Gender": "F",
+  "Address": "1 Brookside St",
+  "PhoneNumber": "100-222-3333"
+}
+
+### PUT update patient via gateway
+PUT {{HostAddress}}/api/patients/1
+Content-Type: application/json
+
+{
+  "Id": 1,
+  "FirstName": "Test",
+  "LastName": "TestNone",
+  "DateOfBirth": "1966-12-31",
+  "Gender": "M",
+  "Address": "1 Brookside St Updated",
+  "PhoneNumber": "100-222-3333"
+}
+
+### DELETE patient via gateway
+DELETE {{HostAddress}}/api/patients/1
