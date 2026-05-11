@@ -1,0 +1,39 @@
+@HostAddress = http://localhost:5256
+
+### GET all patients
+GET {{HostAddress}}/patients
+Accept: application/json
+
+### GET patient by id
+GET {{HostAddress}}/patients/1
+Accept: application/json
+
+### POST create patient
+POST {{HostAddress}}/patients
+Content-Type: application/json
+
+{
+  "FirstName": "Test",
+  "LastName": "TestNone",
+  "DateOfBirth": "1966-12-31",
+  "Gender": "F",
+  "Address": "1 Brookside St",
+  "PhoneNumber": "100-222-3333"
+}
+
+### PUT update patient
+PUT {{HostAddress}}/patients/1
+Content-Type: application/json
+
+{
+  "Id": 1,
+  "FirstName": "Test",
+  "LastName": "TestNone",
+  "DateOfBirth": "1966-12-31",
+  "Gender": "M",
+  "Address": "1 Brookside St Updated",
+  "PhoneNumber": "100-222-3333"
+}
+
+### DELETE patient
+DELETE {{HostAddress}}/patients/1
