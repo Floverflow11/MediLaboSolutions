@@ -1,12 +1,15 @@
+using MediLabo.Patient.Database;
+using MediLabo.Patient.Domain;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+builder.Services.AddDbContext<PatientDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
@@ -14,28 +17,61 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
+var patientGroup = app.MapGroup("/patients");
 
-app.MapGet("/weatherforecast", () =>
+patientGroup.MapGet("/",
+    async (PatientDbContext context) => Results.Ok(await context.Patients.AsNoTracking().ToListAsync()));
+patientGroup.MapGet("/{id:int}", async (int id, PatientDbContext context) =>
+{
+    var patient = await context.Patients.FindAsync(id);
+
+    return patient == null ? Results.NotFound() : Results.Ok(patient);
+});
+patientGroup.MapPost("/", async (Patient patient, PatientDbContext context) =>
+{
+    context.Patients.Add(patient);
+    await context.SaveChangesAsync();
+
+    return Results.Created($"/patients/{patient.Id}", patient);
+});
+patientGroup.MapPut("/{id:int}", async (int id, Patient patient, PatientDbContext context) =>
+{
+    if (id != patient.Id)
     {
-        var forecast = Enumerable.Range(1, 5).Select(index =>
-                new WeatherForecast
-                (
-                    DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                    Random.Shared.Next(-20, 55),
-                    summaries[Random.Shared.Next(summaries.Length)]
-                ))
-            .ToArray();
-        return forecast;
-    })
-    .WithName("GetWeatherForecast");
+        return Results.BadRequest("Parameter id and patient id mismatch");
+    }
+
+    var existingPatient = await context.Patients.FindAsync(id);
+
+    if (existingPatient == null)
+    {
+        return Results.NotFound();
+    }
+
+    existingPatient.FirstName = patient.FirstName;
+    existingPatient.LastName = patient.LastName;
+    existingPatient.DateOfBirth = patient.DateOfBirth;
+    existingPatient.Gender = patient.Gender;
+    existingPatient.Address = patient.Address;
+    existingPatient.PhoneNumber = patient.PhoneNumber;
+
+    await context.SaveChangesAsync();
+
+    return Results.NoContent();
+});
+patientGroup.MapDelete("/{id:int}", async (int id, PatientDbContext context) =>
+{
+    var patient = await context.Patients.FindAsync(id);
+
+    if (patient == null)
+    {
+        return Results.NotFound();
+    }
+
+    context.Patients.Remove(patient);
+    await context.SaveChangesAsync();
+
+    return Results.NoContent();
+});
 
 app.Run();
-
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
