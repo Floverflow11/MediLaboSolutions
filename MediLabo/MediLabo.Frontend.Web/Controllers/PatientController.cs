@@ -17,4 +17,14 @@ public class PatientController : Controller
         var patients = await _patientService.GetPatientsAsync();
         return View(patients);
     }
+
+    public async Task<IActionResult> Details(int id)
+    {
+        var patient = await _patientService.GetPatientAsync(id);
+
+        if (patient == null)
+            return NotFound();
+
+        return View(patient);
+    }
 }

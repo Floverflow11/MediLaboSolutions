@@ -13,6 +13,7 @@
             <th>LastName</th>
             <th>DateOfBirth</th>
             <th>Gender</th>
+            <th>Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -25,6 +26,7 @@
                     <td>@patient.LastName</td>
                     <td>@patient.DateOfBirth</td>
                     <td>@patient.Gender</td>
+                    <td><a asp-controller="Patient" asp-action="Details" asp-route-id="@patient.Id">View</a></td>
                 </tr>
             }
         }

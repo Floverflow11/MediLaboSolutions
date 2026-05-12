@@ -1,0 +1,32 @@
+﻿@model PatientViewModel
+
+@{
+    ViewData["Title"] = $"Patient {Model.Id}";
+}
+
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>FirstName</th>
+            <th>LastName</th>
+            <th>DateOfBirth</th>
+            <th>Gender</th>
+            <th>Address</th>
+            <th>PhoneNumber</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>@Model.Id</td>
+            <td>@Model.FirstName</td>
+            <td>@Model.LastName</td>
+            <td>@Model.DateOfBirth</td>
+            <td>@Model.Gender</td>
+            <td>@Model.Address</td>
+            <td>@Model.PhoneNumber</td>
+        </tr>
+        </tbody>
+    </table>
+</div>

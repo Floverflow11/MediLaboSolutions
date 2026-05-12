@@ -16,4 +16,10 @@ public class PatientService : IPatientService
         var content = await _client.GetFromJsonAsync<IEnumerable<PatientViewModel>>("/api/patients");
         return content ?? [];
     }
+
+    public async Task<PatientViewModel?> GetPatientAsync(int id)
+    {
+        var patient = await _client.GetFromJsonAsync<PatientViewModel>($"/api/patients/{id}");
+        return patient;
+    }
 }
