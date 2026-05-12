@@ -15,6 +15,7 @@
             <th>Gender</th>
             <th>Address</th>
             <th>PhoneNumber</th>
+            <th>Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -26,6 +27,7 @@
             <td>@Model.Gender</td>
             <td>@Model.Address</td>
             <td>@Model.PhoneNumber</td>
+            <td><a asp-controller="Patient" asp-action="Edit" asp-route-id="@Model.Id">Edit</a></td>
         </tr>
         </tbody>
     </table>

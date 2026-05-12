@@ -1,10 +1,12 @@
-﻿namespace MediLabo.Frontend.Web.Models;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace MediLabo.Frontend.Web.Models;
 
 public record PatientViewModel(
     int Id,
-    string FirstName,
-    string LastName,
-    DateOnly DateOfBirth,
-    char Gender,
+    [Required] string FirstName,
+    [Required] string LastName,
+    [Required] DateOnly DateOfBirth,
+    [Required] char Gender,
     string? Address,
     string? PhoneNumber);
