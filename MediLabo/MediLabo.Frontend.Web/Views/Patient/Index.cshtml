@@ -1,0 +1,33 @@
+﻿@model IEnumerable<PatientViewModel>
+
+@{
+    ViewData["Title"] = "Patients";
+}
+
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>FirstName</th>
+            <th>LastName</th>
+            <th>DateOfBirth</th>
+            <th>Gender</th>
+        </tr>
+        </thead>
+        <tbody>
+        @{
+            foreach (var patient in Model)
+            {
+                <tr>
+                    <td>@patient.Id</td>
+                    <td>@patient.FirstName</td>
+                    <td>@patient.LastName</td>
+                    <td>@patient.DateOfBirth</td>
+                    <td>@patient.Gender</td>
+                </tr>
+            }
+        }
+        </tbody>
+    </table>
+</div>
