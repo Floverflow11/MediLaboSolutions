@@ -28,4 +28,10 @@ public class PatientService : IPatientService
         var response = await _client.PutAsJsonAsync($"/api/patients/{patient.Id}", patient);
         response.EnsureSuccessStatusCode();
     }
+    
+    public async Task AddPatientAsync(PatientViewModel patient)
+    {
+        var response = await _client.PostAsJsonAsync("/api/patients", patient);
+        response.EnsureSuccessStatusCode();
+    }
 }

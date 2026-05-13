@@ -48,4 +48,19 @@ public class PatientController : Controller
         await _patientService.UpdatePatientAsync(patient);
         return RedirectToAction("Index");
     }
+    
+    public IActionResult Add()
+    {
+        return View();
+    }
+    
+    [HttpPost]
+    public async Task<IActionResult> Add(PatientViewModel patient)
+    {
+        if (!ModelState.IsValid)
+            return View(patient);
+
+        await _patientService.AddPatientAsync(patient);
+        return RedirectToAction("Index");
+    }
 }
