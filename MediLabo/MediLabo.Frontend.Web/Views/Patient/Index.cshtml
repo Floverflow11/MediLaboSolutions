@@ -1,0 +1,36 @@
+﻿@model IEnumerable<PatientViewModel>
+
+@{
+    ViewData["Title"] = "Patients";
+}
+
+<div class="container">
+    <p><a asp-controller="Patient" asp-action="Add">Add</a></p>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>FirstName</th>
+            <th>LastName</th>
+            <th>DateOfBirth</th>
+            <th>Gender</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        @{
+            foreach (var patient in Model)
+            {
+                <tr>
+                    <td>@patient.Id</td>
+                    <td>@patient.FirstName</td>
+                    <td>@patient.LastName</td>
+                    <td>@patient.DateOfBirth</td>
+                    <td>@patient.Gender</td>
+                    <td><a asp-controller="Patient" asp-action="Details" asp-route-id="@patient.Id">View</a></td>
+                </tr>
+            }
+        }
+        </tbody>
+    </table>
+</div>
