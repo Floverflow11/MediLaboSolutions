@@ -10,7 +10,11 @@
           "Host": "localhost",
           "Port": 5256
         }
-      ]
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "BasicAuth",
+        "AllowedScopes": []
+      }
     },
     {
       "UpstreamPathTemplate": "/api/patients/{id}",
@@ -22,7 +26,11 @@
           "Host": "localhost",
           "Port": 5256
         }
-      ]
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "BasicAuth",
+        "AllowedScopes": []
+      }
     }
   ],
   "GlobalConfiguration": {
