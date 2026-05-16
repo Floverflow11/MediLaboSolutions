@@ -16,6 +16,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FrontendMvc", "FrontendMvc"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediLabo.Frontend.Web", "MediLabo.Frontend.Web\MediLabo.Frontend.Web.csproj", "{1002E5AF-0306-4922-9EEF-0BFA1DED7298}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediLabo.Gateway.Database", "MediLabo.Gateway.Database\MediLabo.Gateway.Database.csproj", "{1F27322D-213F-4162-AD46-C535EC39B75C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,7 @@ Global
 		{4CD7ECCD-1661-4A22-8BA2-25839152DE7B} = {EB033E3F-BB14-4238-820E-1523ADA6AAE8}
 		{63ADA898-4340-4AD0-831E-7A4CAF3C1518} = {0E8BA078-49D5-4DC4-8F87-3D4CC767D5A6}
 		{1002E5AF-0306-4922-9EEF-0BFA1DED7298} = {F1280BA0-AFAF-4B39-820E-6A75FEDFEF87}
+		{1F27322D-213F-4162-AD46-C535EC39B75C} = {0E8BA078-49D5-4DC4-8F87-3D4CC767D5A6}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{93182EDC-212F-47F5-AD2C-B410F15C101F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -49,5 +52,9 @@ Global
 		{1002E5AF-0306-4922-9EEF-0BFA1DED7298}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1002E5AF-0306-4922-9EEF-0BFA1DED7298}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1002E5AF-0306-4922-9EEF-0BFA1DED7298}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F27322D-213F-4162-AD46-C535EC39B75C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F27322D-213F-4162-AD46-C535EC39B75C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F27322D-213F-4162-AD46-C535EC39B75C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F27322D-213F-4162-AD46-C535EC39B75C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
