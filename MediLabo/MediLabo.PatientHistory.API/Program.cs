@@ -74,4 +74,26 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+var noteGroup = app.MapGroup("/notes");
+
+noteGroup.MapGet("/patient/{id:int}", async (int id, HistoryDbContext context) =>
+{
+    var notes = await context.Notes
+        .Where(note => note.PatientId == id)
+        .OrderByDescending(note => note.CreatedAt)
+        .ToListAsync();
+
+    return Results.Ok(notes);
+});
+noteGroup.MapPost("/", async (Note note, HistoryDbContext context) =>
+{
+    note.CreatedAt = DateTime.UtcNow;
+
+    context.Notes.Add(note);
+    await context.SaveChangesAsync();
+
+    return Results.Created($"/notes/{note.Id}", note);
+});
+
 app.Run();
