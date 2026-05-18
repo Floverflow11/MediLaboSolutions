@@ -1,3 +1,5 @@
-﻿namespace MediLabo.Frontend.Web.Models;
+﻿using System.ComponentModel.DataAnnotations;
 
-public record NoteViewModel(string Id, int PatientId, string Content, DateTime CreatedAt);
+namespace MediLabo.Frontend.Web.Models;
+
+public record NoteViewModel(int PatientId, [Required] string Content, DateTime CreatedAt);

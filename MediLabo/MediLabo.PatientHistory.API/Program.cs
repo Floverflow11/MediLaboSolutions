@@ -1,6 +1,7 @@
 using MediLabo.PatientHistory.Database;
 using MediLabo.PatientHistory.Domain;
 using Microsoft.EntityFrameworkCore;
+using MongoDB.Bson;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<HistoryDbContext>(options =>
@@ -88,9 +89,12 @@ noteGroup.MapGet("/patient/{id:int}", async (int id, HistoryDbContext context) =
 });
 noteGroup.MapPost("/", async (Note note, HistoryDbContext context) =>
 {
-    note.CreatedAt = DateTime.UtcNow;
-
-    context.Notes.Add(note);
+    var insertNote = note with
+    {
+        Id = ObjectId.GenerateNewId().ToString(),
+        CreatedAt = DateTime.UtcNow
+    };
+    context.Notes.Add(insertNote);
     await context.SaveChangesAsync();
 
     return Results.Created($"/notes/{note.Id}", note);

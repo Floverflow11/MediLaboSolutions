@@ -16,4 +16,10 @@ public class NoteService : INoteService
         var content = await _client.GetFromJsonAsync<IEnumerable<NoteViewModel>>($"/api/notes/patient/{id}");
         return content ?? [];
     }
+    
+    public async Task AddNoteAsync(NoteViewModel note)
+    {
+        var response = await _client.PostAsJsonAsync("/api/notes", note);
+        response.EnsureSuccessStatusCode();
+    }
 }

@@ -40,7 +40,7 @@ public class PatientController : Controller
 
         if (patient == null)
             return NotFound();
-        
+
         return View(patient);
     }
 
@@ -49,16 +49,16 @@ public class PatientController : Controller
     {
         if (!ModelState.IsValid)
             return View(patient);
-        
+
         await _patientService.UpdatePatientAsync(patient);
         return RedirectToAction("Index");
     }
-    
+
     public IActionResult Add()
     {
         return View();
     }
-    
+
     [HttpPost]
     public async Task<IActionResult> Add(PatientViewModel patient)
     {
@@ -67,5 +67,20 @@ public class PatientController : Controller
 
         await _patientService.AddPatientAsync(patient);
         return RedirectToAction("Index");
+    }
+
+    public IActionResult AddNote(int id)
+    {
+        return View(new NoteViewModel(id, string.Empty, DateTime.UtcNow));
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> AddNote(NoteViewModel note)
+    {
+        if (!ModelState.IsValid)
+            return View(note);
+
+        await _noteService.AddNoteAsync(note);
+        return RedirectToAction("Details", new { id = note.PatientId });
     }
 }
