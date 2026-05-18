@@ -7,10 +7,12 @@ namespace MediLabo.Frontend.Web.Controllers;
 public class PatientController : Controller
 {
     private readonly IPatientService _patientService;
+    private readonly INoteService _noteService;
 
-    public PatientController(IPatientService patientService)
+    public PatientController(IPatientService patientService, INoteService noteService)
     {
         _patientService = patientService;
+        _noteService = noteService;
     }
 
     public async Task<IActionResult> Index()
@@ -26,7 +28,10 @@ public class PatientController : Controller
         if (patient == null)
             return NotFound();
 
-        return View(patient);
+        var notes = await _noteService.GetNotesByPatientAsync(id);
+        var details = new PatientDetailsViewModel(patient, notes);
+
+        return View(details);
     }
 
     public async Task<IActionResult> Edit(int id)
