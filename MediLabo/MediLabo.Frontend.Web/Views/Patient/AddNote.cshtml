@@ -1,0 +1,17 @@
+﻿@model NoteViewModel
+
+@{
+    ViewData["Title"] = $"Add note to patient {Model.PatientId}";
+}
+
+<div class="container py-4">
+    <form asp-controller="Patient" asp-action="AddNote" method="post">
+        <input type="hidden" asp-for="PatientId"/>
+        <div class="form-group py-2">
+            <label asp-for="Content"></label>
+            <textarea asp-for="Content" class="form-control" rows="4"></textarea>
+            <span asp-validation-for="Content" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary px-4 py-2 my-2">Add</button>
+    </form>
+</div>

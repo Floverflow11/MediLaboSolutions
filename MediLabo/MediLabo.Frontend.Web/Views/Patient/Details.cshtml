@@ -1,10 +1,11 @@
-﻿@model PatientViewModel
+﻿@model PatientDetailsViewModel
 
 @{
-    ViewData["Title"] = $"Patient {Model.Id}";
+    ViewData["Title"] = $"Patient {Model.Patient.Id}";
 }
 
 <div class="container">
+    <h2>Patient</h2>
     <table class="table table-striped">
         <thead>
         <tr>
@@ -20,15 +21,35 @@
         </thead>
         <tbody>
         <tr>
-            <td>@Model.Id</td>
-            <td>@Model.FirstName</td>
-            <td>@Model.LastName</td>
-            <td>@Model.DateOfBirth</td>
-            <td>@Model.Gender</td>
-            <td>@Model.Address</td>
-            <td>@Model.PhoneNumber</td>
-            <td><a asp-controller="Patient" asp-action="Edit" asp-route-id="@Model.Id">Edit</a></td>
+            <td>@Model.Patient.Id</td>
+            <td>@Model.Patient.FirstName</td>
+            <td>@Model.Patient.LastName</td>
+            <td>@Model.Patient.DateOfBirth</td>
+            <td>@Model.Patient.Gender</td>
+            <td>@Model.Patient.Address</td>
+            <td>@Model.Patient.PhoneNumber</td>
+            <td><a asp-controller="Patient" asp-action="Edit" asp-route-id="@Model.Patient.Id">Edit</a></td>
         </tr>
+        </tbody>
+    </table>
+
+    <h2>Notes</h2>
+    <p><a asp-controller="Patient" asp-action="AddNote" asp-route-id="@Model.Patient.Id">Add</a></p>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Content</th>
+            <th>CreatedAt</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var note in Model.Notes)
+        {
+            <tr>
+                <td>@note.Content</td>
+                <td>@note.CreatedAt</td>
+            </tr>
+        }
         </tbody>
     </table>
 </div>

@@ -37,3 +37,16 @@ Content-Type: application/json
 
 ### DELETE patient via gateway
 DELETE {{HostAddress}}/api/patients/1
+
+### GET notes by patient id via gateway
+GET {{HostAddress}}/api/notes/patient/1
+Accept: application/json
+
+### POST create note via gateway
+POST {{HostAddress}}/api/notes
+Content-Type: application/json
+
+{
+  "PatientId": 1,
+  "Content": "Patient seems to be in good health."
+}
