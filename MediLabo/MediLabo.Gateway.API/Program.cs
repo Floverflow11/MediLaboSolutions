@@ -13,7 +13,7 @@ builder.Services.AddIdentityCore<IdentityUser>().AddEntityFrameworkStores<AuthDb
 builder.Services.AddAuthentication("BasicAuth")
     .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuth", null);
 
-builder.Configuration.SetBasePath(builder.Environment.ContentRootPath).AddOcelot();
+builder.Configuration.SetBasePath(builder.Environment.ContentRootPath).AddOcelot(builder.Environment);
 builder.Services.AddOcelot(builder.Configuration);
 
 var app = builder.Build();

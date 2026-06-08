@@ -1,0 +1,83 @@
+﻿services:
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      SA_PASSWORD: "Admin123!dB"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+    healthcheck:
+      test: [ "CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P 'Admin123!dB' -C -Q 'SELECT 1' || exit 1" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+
+  medilabo.patient.api:
+    image: medilabo.patient.api
+    build:
+      context: .
+      dockerfile: MediLabo.Patient.API/Dockerfile
+    environment:
+      - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=MediLaboPatient;User Id=sa;Password=Admin123!dB;TrustServerCertificate=True;
+    ports:
+      - "5256:8080"
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+
+  medilabo.patienthistory.api:
+    image: medilabo.patienthistory.api
+    build:
+      context: .
+      dockerfile: MediLabo.PatientHistory.API/Dockerfile
+    environment:
+      - ConnectionStrings__MongoDb=mongodb://mongodb:27017/MediLaboPatientHistory
+    ports:
+      - "5041:8080"
+    depends_on:
+      - mongodb
+
+  medilabo.assessment.api:
+    image: medilabo.assessment.api
+    build:
+      context: .
+      dockerfile: MediLabo.Assessment.API/Dockerfile
+    environment:
+      - Microservices__PatientApiBaseUrl=http://medilabo.patient.api:8080
+      - Microservices__PatientHistoryApiBaseUrl=http://medilabo.patienthistory.api:8080
+    ports:
+      - "5196:8080"
+    depends_on:
+      - medilabo.patient.api
+      - medilabo.patienthistory.api
+
+  medilabo.gateway.api:
+    image: medilabo.gateway.api
+    build:
+      context: .
+      dockerfile: MediLabo.Gateway.API/Dockerfile
+    ports:
+      - "5136:8080"
+    depends_on:
+      - medilabo.patient.api
+      - medilabo.patienthistory.api
+      - medilabo.assessment.api
+
+  medilabo.frontend.web:
+    image: medilabo.frontend.web
+    build:
+      context: .
+      dockerfile: MediLabo.Frontend.Web/Dockerfile
+    environment:
+      - Gateway__BaseUrl=http://medilabo.gateway.api:8080
+    ports:
+      - "5295:8080"
+    depends_on:
+      - medilabo.gateway.api

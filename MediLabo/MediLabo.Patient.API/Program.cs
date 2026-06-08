@@ -74,4 +74,11 @@ patientGroup.MapDelete("/{id:int}", async (int id, PatientDbContext context) =>
     return Results.NoContent();
 });
 
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var context = services.GetRequiredService<PatientDbContext>();
+    context.Database.Migrate();
+}
+
 app.Run();
