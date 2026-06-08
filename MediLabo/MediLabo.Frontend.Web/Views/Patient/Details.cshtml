@@ -32,7 +32,21 @@
         </tr>
         </tbody>
     </table>
-
+    <h2>Assessment</h2>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Age</th>
+            <th>PatientRiskLevel</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Model.Assessment.PatientAge</td>
+                <td>@Model.Assessment.PatientRiskLevel</td>
+            </tr>
+        </tbody>
+    </table>
     <h2>Notes</h2>
     <p><a asp-controller="Patient" asp-action="AddNote" asp-route-id="@Model.Patient.Id">Add</a></p>
     <table class="table table-striped">

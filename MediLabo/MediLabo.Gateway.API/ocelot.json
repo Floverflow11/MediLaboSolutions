@@ -63,6 +63,22 @@
         "AuthenticationProviderKey": "BasicAuth",
         "AllowedScopes": []
       }
+    },
+    {
+      "UpstreamPathTemplate": "/api/assessment/patient/{id}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "DownstreamPathTemplate": "/assessment/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5196
+        }
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "BasicAuth",
+        "AllowedScopes": []
+      }
     }
   ],
   "GlobalConfiguration": {

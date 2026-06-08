@@ -5,6 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddGatewayHttpClient<IPatientService, PatientService>(builder.Configuration);
 builder.Services.AddGatewayHttpClient<INoteService, NoteService>(builder.Configuration);
+builder.Services.AddGatewayHttpClient<IAssessmentService, AssessmentService>(builder.Configuration);
 
 var app = builder.Build();
 
