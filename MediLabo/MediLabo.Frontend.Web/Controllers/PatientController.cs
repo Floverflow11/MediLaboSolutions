@@ -8,11 +8,14 @@ public class PatientController : Controller
 {
     private readonly IPatientService _patientService;
     private readonly INoteService _noteService;
+    private readonly IAssessmentService _assessmentService;
 
-    public PatientController(IPatientService patientService, INoteService noteService)
+    public PatientController(IPatientService patientService, INoteService noteService,
+        IAssessmentService assessmentService)
     {
         _patientService = patientService;
         _noteService = noteService;
+        _assessmentService = assessmentService;
     }
 
     public async Task<IActionResult> Index()
@@ -29,7 +32,9 @@ public class PatientController : Controller
             return NotFound();
 
         var notes = await _noteService.GetNotesByPatientAsync(id);
-        var details = new PatientDetailsViewModel(patient, notes);
+        var assessment = await _assessmentService.GetAssessmentByPatientAsync(id);
+        
+        var details = new PatientDetailsViewModel(patient, notes, assessment);
 
         return View(details);
     }
