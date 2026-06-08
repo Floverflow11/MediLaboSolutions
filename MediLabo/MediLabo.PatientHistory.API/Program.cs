@@ -1,4 +1,4 @@
-using MediLabo.PatientHistory.Database;
+﻿using MediLabo.PatientHistory.Database;
 using MediLabo.PatientHistory.Domain;
 using Microsoft.EntityFrameworkCore;
 using MongoDB.Bson;
@@ -23,45 +23,60 @@ await using (var scope = app.Services.CreateAsyncScope())
         {
             new()
             {
+                Id = ObjectId.GenerateNewId().ToString(),
                 PatientId = 1,
                 Content = "Le patient déclare qu'il 'se sent très bien' Poids égal ou inférieur au poids recommandé"
             },
             new()
             {
+                Id = ObjectId.GenerateNewId().ToString(),
                 PatientId = 2,
                 Content =
                     "Le patient déclare qu'il ressent beaucoup de stress au travail Il se plaint également que son audition est anormale dernièrement"
             },
             new()
             {
+                Id = ObjectId.GenerateNewId().ToString(),
                 PatientId = 2,
                 Content =
                     "Le patient déclare avoir fait une réaction aux médicaments au cours des 3 derniers mois Il remarque également que son audition continue d'être anormale"
             },
-            new() { PatientId = 3, Content = "Le patient déclare qu'il fume depuis peu" },
             new()
             {
+                Id = ObjectId.GenerateNewId().ToString(), PatientId = 3,
+                Content = "Le patient déclare qu'il fume depuis peu"
+            },
+            new()
+            {
+                Id = ObjectId.GenerateNewId().ToString(),
                 PatientId = 3,
                 Content =
                     "Le patient déclare qu'il est fumeur et qu'il a cessé de fumer l'année dernière Il se plaint également de crises d’apnée respiratoire anormales Tests de laboratoire indiquant un taux de cholestérol LDL élevé"
             },
             new()
             {
+                Id = ObjectId.GenerateNewId().ToString(),
                 PatientId = 4,
                 Content =
                     "Le patient déclare qu'il lui est devenu difficile de monter les escaliers Il se plaint également d’être essoufflé Tests de laboratoire indiquant que les anticorps sont élevés Réaction aux médicaments"
             },
             new()
             {
+                Id = ObjectId.GenerateNewId().ToString(),
                 PatientId = 4, Content = "Le patient déclare qu'il a mal au dos lorsqu'il reste assis pendant longtemps"
             },
             new()
             {
+                Id = ObjectId.GenerateNewId().ToString(),
                 PatientId = 4,
                 Content =
                     "Le patient déclare avoir commencé à fumer depuis peu Hémoglobine A1C supérieure au niveau recommandé"
             },
-            new() { PatientId = 4, Content = "Taille, Poids, Cholestérol, Vertige et Réaction" }
+            new()
+            {
+                Id = ObjectId.GenerateNewId().ToString(), PatientId = 4,
+                Content = "Taille, Poids, Cholestérol, Vertige et Réaction"
+            }
         };
 
         context.Notes.AddRange(seedNotes);
